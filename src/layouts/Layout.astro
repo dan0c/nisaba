@@ -42,14 +42,14 @@ const navLinks = [
 
         <a href="/" class="font-display text-2xl text-ink tracking-tight">Nisaba</a>
 
-        <nav class="flex items-center gap-6 sm:gap-8">
+        <nav class="items-center gap-6 sm:gap-8 hidden sm:flex">
           {navLinks.map(({ href, label }) => {
             const active = path === href || path.startsWith(href + '/');
             return (
               <a
                 href={href}
                 class:list={[
-                  'text-sm transition-colors hidden sm:inline',
+                  'text-sm transition-colors',
                   active ? 'font-semibold text-ink' : 'text-ink/60 hover:text-ink',
                 ]}
                 aria-current={active ? 'page' : undefined}
@@ -59,15 +59,93 @@ const navLinks = [
             );
           })}
 
-          <div class="flex items-center gap-1.5 text-sm sm:ml-2 sm:pl-5 sm:border-l sm:border-warm-grey">
+          <div class="flex items-center gap-1.5 text-sm ml-2 pl-5 border-l border-warm-grey">
             <button class="font-semibold text-ink cursor-default" aria-current="true">FR</button>
             <span class="text-ink/30">/</span>
             <button class="text-ink/50 hover:text-ink transition-colors">EN</button>
           </div>
         </nav>
 
+        <button
+          id="menu-open"
+          type="button"
+          class="sm:hidden flex items-center justify-center w-10 h-10 -mr-2"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+
       </div>
     </header>
+
+    <!-- ── Mobile full-screen menu ─────────────────────────────────────── -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-[60] bg-linen flex flex-col sm:hidden invisible opacity-0 transition-opacity duration-200"
+    >
+      <div class="max-w-[1180px] w-full mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="font-display text-2xl text-ink tracking-tight">Nisaba</a>
+        <button
+          id="menu-close"
+          type="button"
+          class="flex items-center justify-center w-10 h-10 -mr-2"
+          aria-label="Fermer le menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+
+      <nav class="flex-1 flex flex-col justify-center gap-2 px-6 -mt-16">
+        {navLinks.map(({ href, label }) => {
+          const active = path === href || path.startsWith(href + '/');
+          return (
+            <a
+              href={href}
+              class:list={[
+                'font-display text-4xl py-3 transition-colors',
+                active ? 'text-sage' : 'text-ink hover:text-sage',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <div class="px-6 pb-10 flex items-center gap-2 text-base">
+        <button class="font-semibold text-ink cursor-default" aria-current="true">FR</button>
+        <span class="text-ink/30">/</span>
+        <button class="text-ink/50 hover:text-ink transition-colors">EN</button>
+      </div>
+    </div>
+
+    <script>
+      const openBtn = document.getElementById('menu-open');
+      const closeBtn = document.getElementById('menu-close');
+      const menu = document.getElementById('mobile-menu');
+
+      function openMenu() {
+        menu?.classList.remove('invisible', 'opacity-0');
+        openBtn?.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        menu?.classList.add('invisible', 'opacity-0');
+        openBtn?.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      openBtn?.addEventListener('click', openMenu);
+      closeBtn?.addEventListener('click', closeMenu);
+      menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
+    </script>
 
     <slot />
 
