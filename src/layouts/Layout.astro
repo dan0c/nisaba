@@ -1,0 +1,75 @@
+---
+interface Props {
+  title?: string;
+  lang?: string;
+  stickyNav?: boolean;
+}
+const {
+  title = 'Nisaba — École de français à Chalabre',
+  lang = 'fr',
+  stickyNav = false,
+} = Astro.props;
+
+const path = Astro.url.pathname;
+const navLinks = [
+  { href: '/cours',    label: 'Cours' },
+  { href: '/a-propos', label: 'À propos' },
+  { href: '/contact',  label: 'Contact' },
+];
+---
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body class="bg-linen text-ink font-body antialiased">
+
+    <header class:list={[
+      'z-50 border-b border-warm-grey bg-linen',
+      stickyNav ? 'fixed top-0 inset-x-0 bg-linen/95 backdrop-blur-sm' : '',
+    ]}>
+      <div class="max-w-[1180px] mx-auto px-6 lg:px-14 h-16 flex items-center justify-between">
+
+        <a href="/" class="font-display text-2xl text-ink tracking-tight">Nisaba</a>
+
+        <nav class="flex items-center gap-6 sm:gap-8">
+          {navLinks.map(({ href, label }) => {
+            const active = path === href || path.startsWith(href + '/');
+            return (
+              <a
+                href={href}
+                class:list={[
+                  'text-sm transition-colors hidden sm:inline',
+                  active ? 'font-semibold text-ink' : 'text-ink/60 hover:text-ink',
+                ]}
+                aria-current={active ? 'page' : undefined}
+              >
+                {label}
+              </a>
+            );
+          })}
+
+          <div class="flex items-center gap-1.5 text-sm sm:ml-2 sm:pl-5 sm:border-l sm:border-warm-grey">
+            <button class="font-semibold text-ink cursor-default" aria-current="true">FR</button>
+            <span class="text-ink/30">/</span>
+            <button class="text-ink/50 hover:text-ink transition-colors">EN</button>
+          </div>
+        </nav>
+
+      </div>
+    </header>
+
+    <slot />
+
+  </body>
+</html>
