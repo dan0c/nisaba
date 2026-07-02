@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { aPropos, type Lang } from '../../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = aPropos[lang];
+---
+
+<Layout title={t.title} page="aPropos" lang={lang} stickyNav={true}>
+
+  <main class="min-h-screen flex items-center px-6 pt-16">
+    <div class="max-w-3xl mx-auto py-24">
+      <p class="text-sm font-semibold text-sage mb-4">{t.eyebrow}</p>
+      <h1 class="font-display text-5xl sm:text-6xl text-ink leading-tight">
+        {t.heading}
+      </h1>
+    </div>
+  </main>
+
+</Layout>

@@ -1,20 +1,27 @@
 ---
+import { routes, nav, type Lang, type PageKey } from '../i18n/translations';
+import ScribbleIcon from '../components/ScribbleIcon.astro';
+
 interface Props {
   title?: string;
-  lang?: string;
+  lang?: Lang;
+  page?: PageKey;
   stickyNav?: boolean;
 }
 const {
   title = 'Nisaba — École de français à Chalabre',
   lang = 'fr',
+  page = 'home',
   stickyNav = false,
 } = Astro.props;
 
-const path = Astro.url.pathname;
-const navLinks = [
-  { href: '/cours',    label: 'Cours' },
-  { href: '/a-propos', label: 'À propos' },
-  { href: '/contact',  label: 'Contact' },
+const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const t = nav[lang];
+
+const navLinks: { key: Exclude<PageKey, 'home'>; href: string; label: string }[] = [
+  { key: 'cours',   href: routes.cours[lang],   label: t.cours },
+  { key: 'aPropos', href: routes.aPropos[lang], label: t.aPropos },
+  { key: 'contact', href: routes.contact[lang], label: t.contact },
 ];
 ---
 <!DOCTYPE html>
@@ -40,11 +47,14 @@ const navLinks = [
     ]}>
       <div class="max-w-[1180px] mx-auto px-6 lg:px-14 h-16 flex items-center justify-between">
 
-        <a href="/" class="font-display text-2xl text-ink tracking-tight">Nisaba</a>
+        <a href={routes.home[lang]} class="flex items-center gap-2 font-display text-2xl text-ink tracking-tight">
+          Nisaba
+          <ScribbleIcon class="w-6 h-6 text-terracotta" />
+        </a>
 
         <nav class="items-center gap-6 sm:gap-8 hidden sm:flex">
-          {navLinks.map(({ href, label }) => {
-            const active = path === href || path.startsWith(href + '/');
+          {navLinks.map(({ key, href, label }) => {
+            const active = page === key;
             return (
               <a
                 href={href}
@@ -60,9 +70,21 @@ const navLinks = [
           })}
 
           <div class="flex items-center gap-1.5 text-sm ml-2 pl-5 border-l border-warm-grey">
-            <button class="font-semibold text-ink cursor-default" aria-current="true">FR</button>
+            <span class:list={['font-semibold', lang === 'fr' ? 'text-ink' : 'text-ink/50']}>
+              {lang === 'fr' ? (
+                <span class="cursor-default" aria-current="true">FR</span>
+              ) : (
+                <a href={routes[page][otherLang]} class="hover:text-ink transition-colors">FR</a>
+              )}
+            </span>
             <span class="text-ink/30">/</span>
-            <button class="text-ink/50 hover:text-ink transition-colors">EN</button>
+            <span class:list={['font-semibold', lang === 'en' ? 'text-ink' : 'text-ink/50']}>
+              {lang === 'en' ? (
+                <span class="cursor-default" aria-current="true">EN</span>
+              ) : (
+                <a href={routes[page][otherLang]} class="hover:text-ink transition-colors">EN</a>
+              )}
+            </span>
           </div>
         </nav>
 
@@ -70,7 +92,7 @@ const navLinks = [
           id="menu-open"
           type="button"
           class="sm:hidden flex items-center justify-center w-10 h-10 -mr-2"
-          aria-label="Ouvrir le menu"
+          aria-label={t.openMenu}
           aria-expanded="false"
           aria-controls="mobile-menu"
         >
@@ -86,20 +108,23 @@ const navLinks = [
       class="fixed inset-0 z-[60] bg-linen flex flex-col sm:hidden invisible opacity-0 transition-opacity duration-200"
     >
       <div class="max-w-[1180px] w-full mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" class="font-display text-2xl text-ink tracking-tight">Nisaba</a>
+        <a href={routes.home[lang]} class="flex items-center gap-2 font-display text-2xl text-ink tracking-tight">
+          Nisaba
+          <ScribbleIcon class="w-6 h-6 text-terracotta" />
+        </a>
         <button
           id="menu-close"
           type="button"
           class="flex items-center justify-center w-10 h-10 -mr-2"
-          aria-label="Fermer le menu"
+          aria-label={t.closeMenu}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
         </button>
       </div>
 
-      <nav class="flex-1 flex flex-col justify-center gap-2 px-6 -mt-16">
-        {navLinks.map(({ href, label }) => {
-          const active = path === href || path.startsWith(href + '/');
+      <nav class="flex-1 flex flex-col justify-center gap-2 px-6 relative z-10">
+        {navLinks.map(({ key, href, label }) => {
+          const active = page === key;
           return (
             <a
               href={href}
@@ -116,9 +141,17 @@ const navLinks = [
       </nav>
 
       <div class="px-6 pb-10 flex items-center gap-2 text-base">
-        <button class="font-semibold text-ink cursor-default" aria-current="true">FR</button>
+        {lang === 'fr' ? (
+          <span class="font-semibold text-ink cursor-default" aria-current="true">FR</span>
+        ) : (
+          <a href={routes[page][otherLang]} class="text-ink/50 hover:text-ink transition-colors">FR</a>
+        )}
         <span class="text-ink/30">/</span>
-        <button class="text-ink/50 hover:text-ink transition-colors">EN</button>
+        {lang === 'en' ? (
+          <span class="font-semibold text-ink cursor-default" aria-current="true">EN</span>
+        ) : (
+          <a href={routes[page][otherLang]} class="text-ink/50 hover:text-ink transition-colors">EN</a>
+        )}
       </div>
     </div>
 
