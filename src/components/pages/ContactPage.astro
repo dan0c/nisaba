@@ -1,23 +1,132 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { contact, type Lang } from '../../i18n/translations';
+import { contact, cours, type Lang } from '../../i18n/translations';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const t = contact[lang];
+const courseOptions = cours[lang].courses.map((c) => ({ id: c.id, name: c.name }));
 ---
 
 <Layout title={t.title} page="contact" lang={lang} stickyNav={true}>
 
-  <main class="min-h-screen flex items-center px-6 pt-16">
-    <div class="max-w-3xl mx-auto py-24">
-      <p class="text-sm font-semibold text-sage mb-4">{t.eyebrow}</p>
-      <h1 class="font-display text-5xl sm:text-6xl text-ink leading-tight">
-        {t.heading}
-      </h1>
-    </div>
+  <main>
+
+    <section class="px-6 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <div class="max-w-2xl mx-auto">
+
+        <p class="text-sm font-semibold text-sage mb-4">{t.eyebrow}</p>
+        <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight mb-4">
+          {t.heading}
+        </h1>
+        <p class="text-lg text-ink/65 leading-relaxed mb-12">
+          {t.sub}
+        </p>
+
+        <form id="contact-form" class="flex flex-col gap-10">
+
+          <!-- Name + Email -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-semibold text-ink mb-2">{t.nameLabel}</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full bg-linen border border-warm-grey px-4 py-3 text-base text-ink focus:outline-none focus:border-sage transition-colors"
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-semibold text-ink mb-2">{t.emailLabel}</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full bg-linen border border-warm-grey px-4 py-3 text-base text-ink focus:outline-none focus:border-sage transition-colors"
+              />
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <label for="phone" class="block text-sm font-semibold text-ink mb-2">
+              {t.phoneLabel} <span class="font-normal text-ink/40">{t.phoneOptional}</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="w-full sm:max-w-xs bg-linen border border-warm-grey px-4 py-3 text-base text-ink focus:outline-none focus:border-sage transition-colors"
+            />
+          </div>
+
+          <!-- Course -->
+          <fieldset>
+            <legend class="text-sm font-semibold text-ink mb-3">{t.courseLabel}</legend>
+            <div class="flex flex-col gap-2.5">
+              {courseOptions.map((course) => (
+                <label class="flex items-center gap-3 text-base text-ink/80">
+                  <input type="radio" name="course" value={course.id} class="accent-sage w-4 h-4" />
+                  {course.name}
+                </label>
+              ))}
+              <label class="flex items-center gap-3 text-base text-ink/80">
+                <input type="radio" name="course" value="unsure" class="accent-sage w-4 h-4" />
+                {t.courseUnsure}
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Level -->
+          <fieldset>
+            <legend class="text-sm font-semibold text-ink mb-3">{t.levelLabel}</legend>
+            <div class="flex flex-col gap-2.5">
+              {t.levelOptions.map((level) => (
+                <label class="flex items-center gap-3 text-base text-ink/80">
+                  <input type="radio" name="level" value={level} class="accent-sage w-4 h-4" />
+                  {level}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-semibold text-ink mb-2">{t.messageLabel}</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              placeholder={t.messagePlaceholder}
+              class="w-full bg-linen border border-warm-grey px-4 py-3 text-base text-ink placeholder:text-ink/35 focus:outline-none focus:border-sage transition-colors resize-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="self-start inline-flex items-center gap-3 bg-terracotta text-white px-8 py-4 text-sm font-medium hover:bg-terracotta/90 transition-colors"
+          >
+            {t.submitLabel}
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+
+        </form>
+
+      </div>
+    </section>
+
   </main>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
+  </script>
 
 </Layout>

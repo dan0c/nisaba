@@ -1,23 +1,79 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { aPropos, type Lang } from '../../i18n/translations';
+import { aPropos, common, routes, type Lang } from '../../i18n/translations';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const t = aPropos[lang];
+const c = common[lang];
 ---
 
 <Layout title={t.title} page="aPropos" lang={lang} stickyNav={true}>
 
-  <main class="min-h-screen flex items-center px-6 pt-16">
-    <div class="max-w-3xl mx-auto py-24">
-      <p class="text-sm font-semibold text-sage mb-4">{t.eyebrow}</p>
-      <h1 class="font-display text-5xl sm:text-6xl text-ink leading-tight">
-        {t.heading}
-      </h1>
-    </div>
+  <main>
+
+    <!-- ── Hero + bio ────────────────────────────────────────────────── -->
+    <section class="px-6 pt-32 pb-20 lg:pt-40 lg:pb-28">
+      <div class="max-w-5xl mx-auto">
+
+        <p class="text-sm font-semibold text-sage mb-4">{t.eyebrow}</p>
+        <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight mb-14 max-w-2xl">
+          {t.heading}
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 md:gap-16">
+
+          <!-- Photo placeholder -->
+          <div class="md:sticky md:top-24 self-start">
+            <div class="aspect-[4/5] bg-warm-grey border border-warm-grey flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ink/20" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="1" />
+                <circle cx="9" cy="9" r="2" />
+                <path d="m21 15-5-5L5 21" />
+              </svg>
+            </div>
+            <p class="text-xs text-ink/40 mt-2">{t.photoAlt}</p>
+          </div>
+
+          <!-- Bio sections -->
+          <div class="flex flex-col gap-12">
+            {t.sections.map((section) => (
+              <div>
+                <h2 class="font-display text-2xl text-ink mb-4">{section.heading}</h2>
+                <div class="flex flex-col gap-4">
+                  {section.paragraphs.map((p) => (
+                    <p class="text-base text-ink/70 leading-relaxed">{p}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Contact CTA ─────────────────────────────────────────────────── -->
+    <section class="py-24 px-6 bg-sage">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="font-display text-4xl sm:text-5xl text-linen leading-tight mb-5">
+          {c.contactCtaHeading}
+        </h2>
+        <p class="text-linen/65 text-lg leading-relaxed mb-10">
+          {c.contactCtaParagraph}
+        </p>
+        <a
+          href={routes.contact[lang]}
+          class="inline-flex items-center gap-3 bg-terracotta text-white px-8 py-4 text-sm font-medium hover:bg-terracotta/90 transition-colors"
+        >
+          {c.contactCtaLabel}
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
   </main>
 
 </Layout>

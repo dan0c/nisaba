@@ -30,8 +30,8 @@ export const home = {
   fr: {
     title: 'Nisaba — École de français à Chalabre, Aude',
     eyebrow: 'École de français · Chalabre, Aude',
-    heroHighlight: 'Vivez la France',
-    heroRest: 'ne la subissez pas.',
+    heroLead: 'Apprenez le français',
+    heroHighlight: 'comme un habitant.',
     heroSub: "Des cours de français pour s'intégrer vraiment dans la vie locale — à Chalabre et dans le Quercorb.",
     heroCta: 'Découvrir les cours',
     coursesEyebrow: 'Nos cours',
@@ -76,8 +76,8 @@ export const home = {
   en: {
     title: 'Nisaba — French Language School in Chalabre, Aude',
     eyebrow: 'French Language School · Chalabre, Aude',
-    heroHighlight: 'Live France',
-    heroRest: "don't just endure it.",
+    heroLead: 'Learn French',
+    heroHighlight: 'like a local.',
     heroSub: "French courses to help you truly settle into local life — in Chalabre and the Quercorb.",
     heroCta: 'Discover our courses',
     coursesEyebrow: 'Our courses',
@@ -364,16 +364,77 @@ export const cours = {
   },
 } as const;
 
+export const common = {
+  fr: {
+    contactCtaHeading: 'Prêt·e à commencer ?',
+    contactCtaParagraph: 'Contactez-moi pour discuter de vos objectifs et trouver la formule qui vous convient.',
+    contactCtaLabel: 'Prendre contact',
+  },
+  en: {
+    contactCtaHeading: 'Ready to get started?',
+    contactCtaParagraph: 'Get in touch to talk through your goals and find the course that suits you.',
+    contactCtaLabel: 'Get in touch',
+  },
+} as const;
+
 export const aPropos = {
   fr: {
     title: 'À propos — Nisaba, École de français à Chalabre',
     eyebrow: 'À propos',
-    heading: 'Bientôt disponible',
+    heading: "Bonjour, je m'appelle Céline !",
+    photoAlt: 'Céline, professeure de français à Nisaba',
+    sections: [
+      {
+        heading: 'Qui suis-je ?',
+        paragraphs: [
+          "Je suis professeur diplômée de Français Langue Étrangère et examinatrice certifiée du DELF depuis plus de 15 ans, dont 10 ans à l'étranger sur différents continents. Mon expérience de coordinatrice d'une Alliance française en Équateur m'a permis de pouvoir ouvrir cet institut de langues en toute confiance.",
+        ],
+      },
+      {
+        heading: 'Ma philosophie',
+        paragraphs: [
+          "Apprendre une langue est un vrai voyage culturel. En effet, chaque langue reflète une manière de penser, une perception du monde. Dans sa grammaire, dans la structure de ses phrases, dans les mots qu'elle utilise ou qu'elle n'a pas, dans ses expressions idiomatiques. Les nuances ne sont pas les mêmes, on ne raconte pas de la même manière dans une langue ou dans une autre.",
+          'Mais apprendre une langue est aussi un vrai défi. C\'est accepter de remettre en question ce que l\'on croyait "logique" afin d\'accepter une manière de penser différente. C\'est tout simplement faire l\'expérience de la diversité culturelle. C\'est tellement enrichissant !',
+        ],
+      },
+      {
+        heading: "Mon style d'enseignement",
+        paragraphs: [
+          "Il existe plusieurs façons d'apprendre une langue. Pour ma part, je suis convaincue qu'on apprend avant tout en faisant.",
+          "Mes cours sont centrés sur l'interaction orale : vous êtes acteur de votre apprentissage. Vous manipulez la langue, vous l'explorez, vous la comprenez et vous l'utilisez dans des situations concrètes, proches de la vie réelle.",
+          "Je m'adapte à votre style d'apprentissage si vous choisissez des cours particuliers.",
+        ],
+      },
+    ],
   },
   en: {
     title: 'About — Nisaba, French Language School in Chalabre',
     eyebrow: 'About',
-    heading: 'Coming soon',
+    heading: "Hi, I'm Céline!",
+    photoAlt: 'Céline, French teacher at Nisaba',
+    sections: [
+      {
+        heading: 'Who am I?',
+        paragraphs: [
+          "I'm a qualified French as a Foreign Language teacher and certified DELF examiner with over 15 years of experience, including 10 years abroad across several continents. My experience coordinating an Alliance Française in Ecuador gave me the confidence to open this language school.",
+        ],
+      },
+      {
+        heading: 'My philosophy',
+        paragraphs: [
+          "Learning a language is a genuine cultural journey. Every language reflects a way of thinking, a perception of the world — in its grammar, in the structure of its sentences, in the words it uses (or doesn't have), in its idiomatic expressions. The nuances differ, and stories aren't told the same way from one language to another.",
+          "But learning a language is also a real challenge. It means questioning what once seemed \"logical\" in order to embrace a different way of thinking. It's simply experiencing cultural diversity firsthand — and it's so rewarding!",
+        ],
+      },
+      {
+        heading: 'My teaching style',
+        paragraphs: [
+          "There are many ways to learn a language. For my part, I'm convinced that we learn, above all, by doing.",
+          "My lessons are centred on spoken interaction: you're an active participant in your own learning. You handle the language, explore it, understand it, and use it in concrete situations close to real life.",
+          'I adapt to your learning style if you choose private lessons.',
+        ],
+      },
+    ],
   },
 } as const;
 
@@ -381,11 +442,35 @@ export const contact = {
   fr: {
     title: 'Contact — Nisaba, École de français à Chalabre',
     eyebrow: 'Contact',
-    heading: 'Bientôt disponible',
+    heading: 'Parlons de vos objectifs',
+    sub: "Remplissez le formulaire ci-dessous et je vous répondrai rapidement pour discuter de vos besoins.",
+    nameLabel: 'Nom',
+    emailLabel: 'Email',
+    phoneLabel: 'Téléphone',
+    phoneOptional: '(optionnel)',
+    courseLabel: 'Quel cours vous intéresse ?',
+    courseUnsure: 'Je ne sais pas encore',
+    levelLabel: 'Quel est votre niveau de français ?',
+    levelOptions: ['Aucun', 'Débutant', 'Intermédiaire', 'Avancé'],
+    messageLabel: 'Message',
+    messagePlaceholder: 'Parlez-moi de vos objectifs, vos disponibilités…',
+    submitLabel: 'Envoyer',
   },
   en: {
     title: 'Contact — Nisaba, French Language School in Chalabre',
     eyebrow: 'Contact',
-    heading: 'Coming soon',
+    heading: "Let's talk about your goals",
+    sub: "Fill in the form below and I'll get back to you quickly to talk through what you need.",
+    nameLabel: 'Name',
+    emailLabel: 'Email',
+    phoneLabel: 'Phone',
+    phoneOptional: '(optional)',
+    courseLabel: 'Which course are you interested in?',
+    courseUnsure: 'Not sure yet',
+    levelLabel: "What's your level of French?",
+    levelOptions: ['None', 'Beginner', 'Intermediate', 'Advanced'],
+    messageLabel: 'Message',
+    messagePlaceholder: 'Tell me about your goals, your availability…',
+    submitLabel: 'Send',
   },
 } as const;
