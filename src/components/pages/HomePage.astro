@@ -1,6 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { home, routes, type Lang } from '../../i18n/translations';
+import EverydayFrenchIcon from '../icons/EverydayFrenchIcon.astro';
+import DelfIcon from '../icons/DelfIcon.astro';
+import PronunciationIcon from '../icons/PronunciationIcon.astro';
+import PrivateIcon from '../icons/PrivateIcon.astro';
 
 interface Props {
   lang: Lang;
@@ -8,6 +12,8 @@ interface Props {
 const { lang } = Astro.props;
 const t = home[lang];
 const coursHref = routes.cours[lang];
+
+const courseIcons = [EverydayFrenchIcon, DelfIcon, PronunciationIcon, PrivateIcon];
 ---
 
 <Layout title={t.title} page="home" lang={lang} stickyNav={true}>
@@ -52,12 +58,14 @@ const coursHref = routes.cours[lang];
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {t.courses.map((course) => (
+          {t.courses.map((course, i) => {
+            const Icon = courseIcons[i];
+            return (
             <a
               href={`${coursHref}${course.anchor}`}
               class="group bg-warm-grey p-8 flex flex-col gap-5 border border-transparent hover:border-sage transition-all duration-300"
             >
-              <span class="text-xs font-mono text-ink/25 tracking-widest">{course.number}</span>
+              <Icon class="w-20 h-20 text-terracotta" />
               <h3 class="font-display text-xl text-ink leading-snug">{course.name}</h3>
               <p class="text-sm text-ink/60 leading-relaxed flex-1">{course.description}</p>
               <span class="flex items-center gap-1.5 text-sm text-sage font-medium group-hover:gap-2.5 transition-all duration-200">
@@ -65,7 +73,8 @@ const coursHref = routes.cours[lang];
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </span>
             </a>
-          ))}
+            );
+          })}
         </div>
 
       </div>
