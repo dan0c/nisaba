@@ -1,6 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { cours, routes, type Lang } from '../../i18n/translations';
+import EverydayFrenchIcon from '../icons/EverydayFrenchIcon.astro';
+import DelfIcon from '../icons/DelfIcon.astro';
+import PronunciationIcon from '../icons/PronunciationIcon.astro';
+import PrivateIcon from '../icons/PrivateIcon.astro';
 
 interface Props {
   lang: Lang;
@@ -8,6 +12,13 @@ interface Props {
 const { lang } = Astro.props;
 const t = cours[lang];
 const contactHref = routes.contact[lang];
+
+const courseIcons = {
+  c1: EverydayFrenchIcon,
+  c2: DelfIcon,
+  c3: PronunciationIcon,
+  c4: PrivateIcon,
+} as const;
 ---
 
 <Layout title={t.title} page="cours" lang={lang}>
@@ -42,14 +53,15 @@ const contactHref = routes.contact[lang];
     </nav>
 
     <!-- ── Mobile course menu (replaces subnav) ──────────────────────── -->
-    <nav class="flex md:hidden flex-col gap-2.5 max-w-[1180px] mx-auto px-6 pt-6 pb-1">
-      <span class="text-sm font-semibold text-sage mb-1">{t.heroEyebrow}</span>
+    <nav class="flex md:hidden flex-col gap-2.5 max-w-[1180px] mx-auto px-6 pt-6 pb-8">
+      <h2 class="font-display text-[30px] leading-none text-ink mb-3">{t.heroEyebrow}</h2>
       {t.courses.map((c) => (
         <a
           href={`#${c.id}`}
-          class="flex items-center px-5 py-[18px] bg-warm-grey border border-black/5 hover:[&_span]:underline"
+          class="group flex flex-col gap-1 px-5 py-4 bg-warm-grey border border-black/5"
         >
-          <span class="font-semibold text-[15px] text-sage underline-offset-[3px]">{c.name}</span>
+          <span class="font-semibold text-[15px] text-sage underline-offset-[3px] group-hover:underline">{c.name}</span>
+          <span class="text-[13px] text-ink/60">{c.blurb}</span>
         </a>
       ))}
     </nav>
@@ -72,7 +84,9 @@ const contactHref = routes.contact[lang];
     </section>
 
     <!-- ── Course modules ────────────────────────────────────────────── -->
-    {t.courses.map((course) => (
+    {t.courses.map((course) => {
+      const Icon = courseIcons[course.id as keyof typeof courseIcons];
+      return (
       <section
         id={course.id}
         class:list={[
@@ -84,6 +98,7 @@ const contactHref = routes.contact[lang];
 
           <!-- Module header -->
           <div class="max-w-2xl mb-9">
+            <Icon class="w-20 h-20 text-terracotta mb-5" />
             <span class="block text-sm font-semibold text-sage mb-3">{course.eyebrow}</span>
             <h3 class="font-display text-[40px] leading-[1.02] text-ink mb-3">{course.name}</h3>
             <p class="text-[16px] leading-[1.55] text-ink/60">{course.summary}</p>
@@ -154,7 +169,8 @@ const contactHref = routes.contact[lang];
           </div>
         </div>
       </section>
-    ))}
+      );
+    })}
 
     <!-- ── Contact footer ────────────────────────────────────────────── -->
     <section class="bg-sage" id="contact">

@@ -155,6 +155,7 @@ export const cours = {
         id: 'c1',
         eyebrow: "Objectif : l'intégration dans la société française",
         name: 'Le français au quotidien',
+        blurb: 'Le français pour la vie de tous les jours.',
         summary: 'Des situations de la vie réelle — médecin, garagiste, voisins, téléphone — pour un français qui sert vraiment à Chalabre et dans le Quercorb.',
         programme: [
           'Les situations de la vie quotidienne (médecin, garagiste, problème domestique…)',
@@ -179,6 +180,7 @@ export const cours = {
         id: 'c2',
         eyebrow: "Réussir l'examen, même avec un niveau imparfait",
         name: 'Préparation DELF B1/B2',
+        blurb: 'Une méthode éprouvée pour réussir votre examen.',
         summary: "En tant qu'ancienne examinatrice DELF certifiée, je vous donne les clés méthodologiques pour maximiser vos chances le jour de l'examen.",
         programme: [
           "Ce n'est pas un cours de langue, mais un cours de préparation méthodologique",
@@ -202,6 +204,7 @@ export const cours = {
         id: 'c3',
         eyebrow: 'Mieux prononcer pour mieux se faire comprendre',
         name: 'Ateliers Prononciation',
+        blurb: 'Gagnez en clarté et en confiance à l\'oral.',
         summary: "Un atelier intensif en petit groupe pour gagner en clarté et en confiance à l'oral — sons, rythme, enchaînements.",
         programme: [
           'La prosodie (le rythme) du français',
@@ -223,6 +226,7 @@ export const cours = {
         id: 'c4',
         eyebrow: 'Sur mesure',
         name: 'Cours individuels',
+        blurb: 'Un accompagnement entièrement personnalisé.',
         summary: 'Une formule entièrement sur mesure — contenu, pédagogie et modalités adaptés à vos objectifs et à votre rythme.',
         programme: null,
         how: [
@@ -275,6 +279,7 @@ export const cours = {
         id: 'c1',
         eyebrow: 'Goal: integrating into French society',
         name: 'Everyday French',
+        blurb: 'French for everyday life.',
         summary: "Real-life situations — the doctor, the mechanic, neighbours, phone calls — for French that's genuinely useful in Chalabre and the Quercorb.",
         programme: [
           'Everyday situations (doctor, mechanic, household issues…)',
@@ -299,6 +304,7 @@ export const cours = {
         id: 'c2',
         eyebrow: 'Pass the exam, even with imperfect French',
         name: 'DELF B1/B2 Preparation',
+        blurb: 'A proven method to pass your exam.',
         summary: "As a former certified DELF examiner, I'll give you the methodology to maximise your chances on exam day.",
         programme: [
           "This isn't a language course, but methodological exam preparation",
@@ -322,6 +328,7 @@ export const cours = {
         id: 'c3',
         eyebrow: 'Better pronunciation, better understood',
         name: 'Pronunciation Workshops',
+        blurb: 'Gain clarity and confidence speaking.',
         summary: 'An intensive small-group workshop to gain clarity and confidence speaking — sounds, rhythm, linking words.',
         programme: [
           'French prosody (rhythm)',
@@ -343,6 +350,7 @@ export const cours = {
         id: 'c4',
         eyebrow: 'Tailor-made',
         name: 'Private Lessons',
+        blurb: 'Fully personalised support.',
         summary: 'A fully bespoke course — content, teaching style and format adapted to your goals and pace.',
         programme: null,
         how: [
