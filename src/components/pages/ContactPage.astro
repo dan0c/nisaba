@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Testimonials from '../Testimonials.astro';
 import { contact, cours, type Lang } from '../../i18n/translations';
 
 interface Props {
@@ -119,6 +120,8 @@ const courseOptions = cours[lang].courses.map((c) => ({ id: c.id, name: c.name }
 
       </div>
     </section>
+
+    <Testimonials lang={lang} />
 
   </main>
 

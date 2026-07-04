@@ -1,6 +1,7 @@
 ---
 import { routes, nav, type Lang, type PageKey } from '../i18n/translations';
 import ScribbleIcon from '../components/ScribbleIcon.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
@@ -181,6 +182,8 @@ const navLinks: { key: Exclude<PageKey, 'home'>; href: string; label: string }[]
     </script>
 
     <slot />
+
+    <Footer lang={lang} page={page} />
 
   </body>
 </html>

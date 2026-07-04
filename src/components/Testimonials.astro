@@ -1,0 +1,43 @@
+---
+import { testimonials, testimonialsData, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = testimonials[lang];
+---
+
+<section class="py-16 lg:py-20 px-6 bg-terracotta">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="mb-9">
+      <p class="text-sm font-semibold text-white/85 mb-3">{t.eyebrow}</p>
+      <h2 class="font-display text-4xl sm:text-5xl text-white">{t.heading}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      {testimonialsData.map((item) => (
+        <div class="bg-linen border border-ink/10 p-7 flex flex-col gap-5 shadow-[0_8px_24px_rgba(120,60,30,0.14)]">
+          <div class="relative">
+            <span class="absolute -top-5 -left-1 font-display text-5xl text-terracotta/50 select-none" aria-hidden="true">&ldquo;</span>
+            <p class="relative text-[14px] leading-[1.5] text-ink">
+              {item.quote}
+            </p>
+          </div>
+          <div class="mt-auto flex items-center gap-3">
+            <div class="w-[38px] h-[38px] rounded-full bg-sage text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">
+              {item.initials}
+            </div>
+            <div class="flex flex-col">
+              <span class="font-display text-xl text-ink">{item.name}</span>
+              <span class="text-xs text-ink/60">{item.course}</span>
+            </div>
+            <span class="ml-auto text-xs font-semibold tracking-[0.08em] uppercase text-ink/50">{item.flag}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

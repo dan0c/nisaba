@@ -482,3 +482,53 @@ export const contact = {
     submitLabel: 'Send',
   },
 } as const;
+
+export const testimonials = {
+  fr: {
+    eyebrow: 'Elles et ils ont appris avec nous',
+    heading: 'Ce que disent nos élèves',
+  },
+  en: {
+    eyebrow: 'People who learned with us',
+    heading: 'What our students say',
+  },
+} as const;
+
+// Quotes are intentionally left in the language each student would speak —
+// this reassures foreign learners that people like them succeed here.
+export const testimonialsData = [
+  {
+    initials: 'SH',
+    quote: "Six months in and I can finally handle the doctor, the bank, the neighbours — in French. The classes are about real life, not textbooks.",
+    name: 'Sarah H.',
+    course: 'Le français au quotidien',
+    flag: 'EN',
+  },
+  {
+    initials: 'MK',
+    quote: 'Ich habe mein DELF B2 bestanden! Die Vorbereitung war genau auf die Prüfung zugeschnitten — jede Stunde hat sich gelohnt.',
+    name: 'Markus K.',
+    course: 'Préparation DELF B1/B2',
+    flag: 'DE',
+  },
+  {
+    initials: 'EM',
+    quote: 'Por fin la gente me entiende cuando hablo. El taller de pronunciación cambió mi confianza por completo.',
+    name: 'Elena M.',
+    course: 'Ateliers Prononciation',
+    flag: 'ES',
+  },
+] as const;
+
+export const footer = {
+  fr: {
+    tagline: 'École de français · Chalabre, Aude',
+    legal: 'Mentions légales',
+    copyright: '© 2026 Nisaba — École de français, Chalabre',
+  },
+  en: {
+    tagline: 'French Language School · Chalabre, Aude',
+    legal: 'Legal notice',
+    copyright: '© 2026 Nisaba — French Language School, Chalabre',
+  },
+} as const;

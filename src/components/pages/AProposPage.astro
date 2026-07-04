@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Testimonials from '../Testimonials.astro';
+import EverydayFrenchIcon from '../icons/EverydayFrenchIcon.astro';
 import { aPropos, common, routes, type Lang } from '../../i18n/translations';
 
 interface Props {
@@ -55,9 +57,12 @@ const c = common[lang];
       </div>
     </section>
 
+    <Testimonials lang={lang} />
+
     <!-- ── Contact CTA ─────────────────────────────────────────────────── -->
     <section class="py-24 px-6 bg-sage">
       <div class="max-w-2xl mx-auto text-center">
+        <EverydayFrenchIcon class="w-24 h-24 text-linen mx-auto mb-6" />
         <h2 class="font-display text-4xl sm:text-5xl text-linen leading-tight mb-5">
           {c.contactCtaHeading}
         </h2>
