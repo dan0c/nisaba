@@ -22,30 +22,40 @@ const courseIcons = [EverydayFrenchIcon, DelfIcon, PronunciationIcon, PrivateIco
   <main>
 
     <!-- ── Hero ───────────────────────────────────────────────────────── -->
-    <section class="min-h-screen flex items-center px-6 pt-16">
-      <div class="max-w-5xl mx-auto py-24 lg:py-36">
+    <section class="flex items-center px-6 pt-16">
+      <div class="max-w-6xl mx-auto py-16 lg:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-        <p class="text-sm font-semibold text-sage mb-10">
-          {t.eyebrow}
-        </p>
+          <img
+            src="/images/hero-illustration.svg"
+            alt=""
+            class="w-full max-w-md mx-auto lg:mx-0 lg:max-w-none order-first lg:order-none"
+          />
 
-        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl text-ink leading-[1.1] mb-8">
-          {t.heroLead}<br />
-          <span class="stroke-underline">{t.heroHighlight}</span>
-        </h1>
+          <div>
+            <p class="text-sm font-semibold text-sage mb-10">
+              {t.eyebrow}
+            </p>
 
-        <p class="text-lg sm:text-xl text-ink/65 max-w-xl mb-12 leading-relaxed">
-          {t.heroSub}
-        </p>
+            <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl text-ink leading-[1.1] mb-8">
+              {t.heroLead}<br />
+              <span class="stroke-underline">{t.heroHighlight}</span>
+            </h1>
 
-        <a
-          href={coursHref}
-          class="inline-flex items-center gap-3 bg-terracotta text-white px-8 py-4 text-sm font-medium hover:bg-terracotta/90 transition-colors"
-        >
-          {t.heroCta}
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
+            <p class="text-lg sm:text-xl text-ink/65 max-w-xl mb-12 leading-relaxed">
+              {t.heroSub}
+            </p>
 
+            <a
+              href={coursHref}
+              class="inline-flex items-center gap-3 bg-terracotta text-white px-8 py-4 text-sm font-medium hover:bg-terracotta/90 transition-colors"
+            >
+              {t.heroCta}
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+
+        </div>
       </div>
     </section>
 
